@@ -7,11 +7,16 @@ import androidx.paging.PagingData
 
 import kotlinx.coroutines.flow.Flow
 
-class TasksViewModel(): ViewModel() {
+class TasksViewModel(tasksDao: TasksDao): ViewModel() {
 
-    private val taskSource = TaskSource(TasksRepository())
+    val tasksRepository = TasksRepository(tasksDao)
 
-    suspend fun getAllTasks(): Flow<PagingData<TaskData>> {
-        return Pager(PagingConfig(50)) { taskSource }.flow
+    fun getAllTasks(): Flow<PagingData<Task>> {
+        return Pager(PagingConfig(50)) {
+            TaskSource(tasksRepository) }.flow
+    }
+
+    fun markAsCompleted(task: Task) {
+        tasksRepository.markTaskAsCompleted(task)
     }
 }

@@ -9,29 +9,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.example.theoldlist.core.ReactiveUi
 import com.example.theoldlist.tasklist.TaskListUiComposer
+import com.example.theoldlist.taskpage.appbar.AppBarUiComposer
 import com.example.theoldlist.ui.theme.TheOldListTheme
 
 class TasksPageUiComposer {
 
     private val taskListUiComposer = TaskListUiComposer()
+    private val appBarUiComposer = AppBarUiComposer()
+
 
     @ExperimentalMaterialApi
     @Composable
     fun compose(uiModel: TasksPageUiModel) {
-        TasksPageUi(uiModel, taskListUiComposer)
+        TasksPageUi(uiModel, taskListUiComposer, appBarUiComposer)
     }
 }
 
 @ExperimentalMaterialApi
 @Composable
-private fun TasksPageUi(uiModel: TasksPageUiModel, taskListUiComposer: TaskListUiComposer) {
+private fun TasksPageUi(uiModel: TasksPageUiModel, taskListUiComposer: TaskListUiComposer, appBarUiComposer: AppBarUiComposer) {
     ReactiveUi(uiModel = uiModel) { content ->
-        val appBarUiModel = content.appBarUiModel
         TheOldListTheme {
             Column {
-                TopAppBar {
-                    Text(text = appBarUiModel.content.value.title, color = Color.Cyan, style = MaterialTheme.typography.h6)
-                }
+                appBarUiComposer.compose(content.appBarUiModel)
                 taskListUiComposer.compose(taskListUiModel = content.taskListUiModel)
             }
         }

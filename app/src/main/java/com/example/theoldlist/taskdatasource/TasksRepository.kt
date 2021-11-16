@@ -1,29 +1,31 @@
 package com.example.theoldlist.taskdatasource
 
-class TasksRepository {
+class TasksRepository(private val tasksDao: TasksDao) {
 
-    suspend fun getAllTasks() {
-
-    }
 
     suspend fun getTaskAt(index: Int): TaskPage {
+        val list1ToReturn = mutableListOf(Task("Test1", "Do laundry"),
+            Task("Test2", "Do laundry"),
+            Task("Test3", "Groceries"),
+            Task("Tes4", "Watch movies")
+        )
+            list1ToReturn.add(Task("Tes45", "Go away task. You will be deleted"))
         return if (index == 0) {
             TaskPage(
-            listOf(
-                TaskData("Test1", "Do laundry"),
-                TaskData("Test2", "Do laundry"),
-                TaskData("Test3", "Groceries"),
-                TaskData("Tes4", "Watch movies")
-            ), 1)
+                list1ToReturn.toList(), 1, null)
         } else if (index == 1) {
             TaskPage(
                 listOf(
-                    TaskData("Test5", "Watch movies")
-                ), 2)
+                    Task("Test5", "Watch movies")
+                ), 2, 1)
         } else {
-            TaskPage(listOf(), null)
+            TaskPage(listOf(), null, null)
         }
+    }
+
+    fun markTaskAsCompleted(task: Task) {
+
     }
 }
 
-class TaskPage(val taskDataList: List<TaskData>, val nextPageNumber: Int?)
+class TaskPage(val taskList: List<Task>, val nextPageNumber: Int?, val prevPageNumber: Int?)

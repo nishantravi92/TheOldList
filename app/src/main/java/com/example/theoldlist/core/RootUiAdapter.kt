@@ -1,11 +1,12 @@
 package com.example.theoldlist.core
 
+import kotlinx.coroutines.CoroutineScope
 
-interface UiAdapter {
-    suspend fun createUiModel(): UiModel
+interface UiAdapter<T:UiModel> {
+    suspend fun createAndSetupUiModel(scope: CoroutineScope): T
 }
 
-interface RootUiAdapter:UiAdapter {
+interface RootUiAdapter<T: UiModel>:UiAdapter<T> {
     val loadingUiModel:UiModel
-    override suspend fun createUiModel(): UiModel
+    override suspend fun createAndSetupUiModel(coroutineScope: CoroutineScope): T
 }

@@ -7,7 +7,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 
-fun Modifier.roundedShape(size: Dp = 2.dp): Modifier {
+fun Modifier.roundedShape(size: Dp = 4.dp): Modifier {
     return this.clip(
         RoundedCornerShape(size))
 }
