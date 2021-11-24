@@ -66,5 +66,4 @@ class RenderBridge(
         }
         scope.launch { uiModel.value = rootUiAdapter.createAndSetupUiModel(scope) }
     }
-
 }
