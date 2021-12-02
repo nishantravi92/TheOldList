@@ -1,4 +1,4 @@
 package com.example.theoldlist.homepage
 
-class ListEntryUiAdapter {
+class HomePageListUiAdapter {
 }
