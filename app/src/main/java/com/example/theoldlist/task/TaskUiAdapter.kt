@@ -1,19 +1,27 @@
 package com.example.theoldlist.task
 
-import com.example.theoldlist.core.UiAdapter
 import com.example.theoldlist.taskdatasource.Task
 import com.example.theoldlist.taskdatasource.TasksViewModel
-import kotlinx.coroutines.CoroutineScope
 
-class TaskUiAdapter(private val tasksViewModel: TasksViewModel, private val task: Task): UiAdapter<TaskUiModel> {
+class TaskUiAdapter(private val tasksViewModel: TasksViewModel) {
 
-    val taskUiModelAction = object : TaskUiModelAction {
-        override fun onChecked() {
-            tasksViewModel.markAsCompleted(task)
+    fun createAndSetupUiModel(task: Task): TaskUiModel {
+        val taskUiModelAction = object : TaskUiModelAction {
+            override fun onClicked() {
+                tasksViewModel.markTaskAsCompleted(task)
+            }
+
+            override fun onStarClicked(isStarred: Boolean) {
+                tasksViewModel.addTask(task.copy(starred = isStarred))
+            }
         }
-    }
-
-    override suspend fun createAndSetupUiModel(scope: CoroutineScope): TaskUiModel {
-        return TaskUiModel(TaskUiModelContent(title = task.title, taskUiModelAction = taskUiModelAction))
+        return TaskUiModel(
+            identity = task.id,
+            taskUiModelContent = TaskUiModelContent(
+                title = task.title,
+                taskUiModelAction = taskUiModelAction,
+                isStarred = task.starred
+            )
+        )
     }
 }

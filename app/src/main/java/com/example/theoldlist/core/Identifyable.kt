@@ -1,4 +1,5 @@
 package com.example.theoldlist.core
 
-class Identifyable {
+interface Identifyable {
+    val identity: String
 }

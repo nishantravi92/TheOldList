@@ -1,22 +1,39 @@
 package com.example.theoldlist.taskdatasource
 
 import androidx.lifecycle.ViewModel
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-
 import kotlinx.coroutines.flow.Flow
 
 class TasksViewModel(tasksDao: TasksDao): ViewModel() {
 
-    val tasksRepository = TasksRepository(tasksDao)
+    private val tasksRepository = TasksRepository(tasksDao, viewModelScope)
 
     fun getAllTasks(): Flow<PagingData<Task>> {
-        return Pager(PagingConfig(50)) {
-            TaskSource(tasksRepository) }.flow
+        return tasksRepository.getAllTasks()
     }
 
-    fun markAsCompleted(task: Task) {
+    fun markTaskAsCompleted(task: Task) {
         tasksRepository.markTaskAsCompleted(task)
+    }
+
+    fun addTask(task: Task) {
+        tasksRepository.addTask(task)
+    }
+
+    fun getTasksCount(): Int {
+        return tasksRepository.getTasksCount()
+    }
+
+    fun getTasksStarredCount(): Int {
+        return tasksRepository.getTasksStarredCount()
+    }
+
+    fun getTasksDueTodayCount(): Int {
+        return tasksRepository.getTasksCount()
+    }
+
+    fun getTasksDueThisWeekCount(): Int {
+        return tasksRepository.getTasksCount()
     }
 }

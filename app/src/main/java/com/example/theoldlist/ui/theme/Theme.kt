@@ -1,10 +1,17 @@
 package com.example.theoldlist.ui.theme
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import com.example.theoldlist.R
 
 private val DarkColorPalette = darkColors(
         primary = purple200,
@@ -34,11 +41,20 @@ fun TheOldListTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Compos
     } else {
         LightColorPalette
     }
-
-        MaterialTheme(
-            colors = colors,
-            typography = typography,
-            shapes = shapes,
-            content = content
-        )
+    MaterialTheme(
+        colors = colors,
+        typography = typography,
+        shapes = shapes,
+    ) {
+        Box {
+            val image = painterResource(id = R.drawable.nature_waterfall)
+            Image(
+                painter = image,
+                contentScale = ContentScale.Crop,
+                contentDescription = "BackgroundImage",
+                modifier = Modifier.fillMaxSize()
+            )
+            content()
+        }
+    }
 }
