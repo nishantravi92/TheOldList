@@ -50,6 +50,20 @@ class HomeListRepository(
                             entryType = EntryType.WEEK
                         )
                     )
+                    homeListEntryDao.addListEntry(
+                        HomeListEntry(
+                            id = createHomeListId(),
+                            title = "Movies to watch",
+                            entryType = EntryType.MOVIES
+                        )
+                    )
+                    homeListEntryDao.addListEntry(
+                        HomeListEntry(
+                            id = createHomeListId(),
+                            title = "Books to read",
+                            entryType = EntryType.BOOKS
+                        )
+                    )
                 }
             }
         }

@@ -3,14 +3,9 @@ package com.example.theoldlist.task
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.focusable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.outlined.Star
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,6 +20,7 @@ import com.example.theoldlist.core.roundedShape
 
 class TaskUiComposer() {
 
+    @ExperimentalFoundationApi
     @ExperimentalMaterialApi
     @Composable
     fun compose(uiModel: TaskUiModel, modifier: Modifier = Modifier) {
@@ -32,6 +28,7 @@ class TaskUiComposer() {
     }
 }
 
+@ExperimentalFoundationApi
 @ExperimentalMaterialApi
 @Composable
 private fun TaskUi(uiModel: TaskUiModel, modifier: Modifier) {
@@ -47,6 +44,7 @@ private fun TaskUi(uiModel: TaskUiModel, modifier: Modifier) {
                 .fillMaxWidth()
                 .roundedShape()
                 .background(backgroundColor)
+                .combinedClickable(onLongClick = { value.taskUiModelAction.onLongClicked() }) {  }
         ) {
             Spacer(modifier = modifier.width(width = 8.dp))
             Checkbox(
@@ -54,7 +52,7 @@ private fun TaskUi(uiModel: TaskUiModel, modifier: Modifier) {
                 colors = CheckboxDefaults.colors(uncheckedColor = Color.DarkGray),
                 onCheckedChange = {
                     shouldHideView = true
-                    value.taskUiModelAction.onClicked()
+                    value.taskUiModelAction.onChecked()
                 })
             Text(
                 text = value.title,

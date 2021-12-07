@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.example.theoldlist.R
 import com.example.theoldlist.core.ReactiveUi
 import com.example.theoldlist.homepage.ListEntryType
 import com.example.theoldlist.homepage.ListEntryUiModel
@@ -107,6 +108,14 @@ private fun DisplayIcon(content: ListEntryUiModelContent) {
             imageVector = Icons.Outlined.DateRange,
             contentDescription = contentDescription,
             tint = Color.Yellow
+        )
+        ListEntryType.MOVIES_TO_WATCH -> Icon(
+            painter = painterResource(id = R.drawable.outline_theaters_24),
+            contentDescription = contentDescription,
+        )
+        ListEntryType.BOOKS_TO_READ -> Icon(
+            painter = painterResource(id = R.drawable.outline_menu_book_24),
+            contentDescription = contentDescription,
         )
     }
 }

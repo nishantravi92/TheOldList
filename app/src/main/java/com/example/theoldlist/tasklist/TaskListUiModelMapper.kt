@@ -1,5 +1,6 @@
 package com.example.theoldlist.tasklist
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -19,6 +20,7 @@ import com.example.theoldlist.task.TaskUiModel
 class TaskListUiModelMapper: UiModelMapper {
     private val taskUiComposer = TaskUiComposer()
 
+    @ExperimentalFoundationApi
     @ExperimentalMaterialApi
     @Composable
     override fun mapUiModel(model: UiModel) {

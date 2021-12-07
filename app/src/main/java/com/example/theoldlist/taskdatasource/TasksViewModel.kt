@@ -3,6 +3,7 @@ package com.example.theoldlist.taskdatasource
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import com.example.theoldlist.homelistsdatasource.EntryType
 import kotlinx.coroutines.flow.Flow
 
 class TasksViewModel(tasksDao: TasksDao): ViewModel() {
@@ -11,6 +12,14 @@ class TasksViewModel(tasksDao: TasksDao): ViewModel() {
 
     fun getAllTasks(): Flow<PagingData<Task>> {
         return tasksRepository.getAllTasks()
+    }
+
+    fun getAllStarredTasks(): Flow<PagingData<Task>> {
+        return tasksRepository.getAllStarredTasks()
+    }
+
+    fun getAllTasksByEntryType(entryType: EntryType): Flow<PagingData<Task>> {
+        return tasksRepository.getTasksByEntryType(entryType)
     }
 
     fun markTaskAsCompleted(task: Task) {
@@ -23,6 +32,10 @@ class TasksViewModel(tasksDao: TasksDao): ViewModel() {
 
     fun getTasksCount(): Int {
         return tasksRepository.getTasksCount()
+    }
+
+    fun getTasksCountByEntryType(entryType: EntryType): Int {
+        return tasksRepository.getTasksCountByEntryType(entryType)
     }
 
     fun getTasksStarredCount(): Int {

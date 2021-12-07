@@ -7,7 +7,9 @@ enum class EntryType {
     HOME,
     STARRED,
     TODAY,
-    WEEK
+    WEEK,
+    MOVIES,
+    BOOKS
 }
 
 @Entity(tableName = "homelistentry")

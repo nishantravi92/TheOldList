@@ -10,10 +10,23 @@
         <action
             android:id="@+id/action_homeFragment_to_tasksFragment"
             app:destination="@id/tasksFragment"
-            app:launchSingleTop="false" />
+            app:launchSingleTop="false">
+        </action>
     </fragment>
     <fragment
         android:id="@+id/tasksFragment"
         android:name="com.example.theoldlist.taskpage.TasksFragment"
-        android:label="TasksFragment" />
+        android:label="TasksFragment" >
+        <argument
+            android:name="listEntryType"
+            app:argType="com.example.theoldlist.homelistsdatasource.EntryType"
+            android:defaultValue="HOME" />
+        <action
+            android:id="@+id/action_tasksFragment_to_editTaskBottomSheetFragment"
+            app:destination="@id/editTaskBottomSheetFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/editTaskBottomSheetFragment"
+        android:name="com.example.theoldlist.edittask.EditTaskBottomSheetFragment"
+        android:label="EditTaskBottomSheetFragment" />
 </navigation>

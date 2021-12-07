@@ -30,12 +30,15 @@ class ListEntryUiAdapter(
             withContext(Dispatchers.IO) {
                 if (homeListEntry.entryType == EntryType.TODAY) {
                     numberOfTasksMutableFlow.value = taskListViewModel.getTasksCount()
-
                 } else if (homeListEntry.entryType == EntryType.STARRED) {
                     numberOfTasksMutableFlow.value = taskListViewModel.getTasksStarredCount()
-
-                } else {
+                } else if (homeListEntry.entryType == EntryType.WEEK) {
                     numberOfTasksMutableFlow.value = taskListViewModel.getTasksCount()
+                } else if (homeListEntry.entryType == EntryType.HOME) {
+                    numberOfTasksMutableFlow.value = taskListViewModel.getTasksCount()
+                } else {
+                    numberOfTasksMutableFlow.value =
+                        taskListViewModel.getTasksCountByEntryType(homeListEntry.entryType)
                 }
             }
         }
@@ -58,7 +61,7 @@ class ListEntryUiAdapter(
             numberOfTasksRemaining = numberOfTasks,
             listEntryUiAction = {
                 val homeFragmentDirectionsToTasksFragment =
-                    HomeFragmentDirections.actionHomeFragmentToTasksFragment()
+                    HomeFragmentDirections.actionHomeFragmentToTasksFragment(homeListEntry.entryType)
                 navController.navigate(homeFragmentDirectionsToTasksFragment,
                     navOptions {
                         anim {
@@ -76,6 +79,8 @@ class ListEntryUiAdapter(
         else if (entryType == EntryType.STARRED) ListEntryType.STARRED
         else if (entryType == EntryType.TODAY) ListEntryType.DUE_TODAY
         else if (entryType == EntryType.WEEK) ListEntryType.DUE_THIS_WEEK
+        else if (entryType == EntryType.MOVIES) ListEntryType.MOVIES_TO_WATCH
+        else if (entryType == EntryType.BOOKS) ListEntryType.BOOKS_TO_READ
         else ListEntryType.HOME
     }
 }

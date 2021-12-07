@@ -7,9 +7,11 @@ import com.example.theoldlist.core.ReactiveUiModel
 
 
 interface TaskUiModelAction {
-    fun onClicked()
+    fun onChecked()
 
     fun onStarClicked(isStarred: Boolean)
+
+    fun onLongClicked()
 }
 
 class TaskUiModel(identity: String, taskUiModelContent: TaskUiModelContent) : ReactiveUiModel<TaskUiModelContent>, Identifyable {

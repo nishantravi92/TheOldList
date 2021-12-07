@@ -30,5 +30,7 @@ enum class ListEntryType {
     HOME,
     STARRED,
     DUE_TODAY,
-    DUE_THIS_WEEK
+    DUE_THIS_WEEK,
+    MOVIES_TO_WATCH,
+    BOOKS_TO_READ
 }

@@ -1,14 +1,21 @@
 package com.example.theoldlist.task
 
+import androidx.navigation.NavController
 import com.example.theoldlist.taskdatasource.Task
 import com.example.theoldlist.taskdatasource.TasksViewModel
+import com.example.theoldlist.taskpage.TasksFragmentDirections
 
-class TaskUiAdapter(private val tasksViewModel: TasksViewModel) {
+class TaskUiAdapter(private val tasksViewModel: TasksViewModel, private val navController: NavController) {
 
     fun createAndSetupUiModel(task: Task): TaskUiModel {
         val taskUiModelAction = object : TaskUiModelAction {
-            override fun onClicked() {
+
+            override fun onChecked() {
                 tasksViewModel.markTaskAsCompleted(task)
+            }
+
+            override fun onLongClicked() {
+                navController.navigate(TasksFragmentDirections.actionTasksFragmentToEditTaskBottomSheetFragment())
             }
 
             override fun onStarClicked(isStarred: Boolean) {

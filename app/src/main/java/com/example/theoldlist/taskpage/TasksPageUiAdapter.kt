@@ -11,13 +11,13 @@ import com.example.theoldlist.appbar.AppBarUiModelContent
 import com.example.theoldlist.appbar.NavItemUiModel
 import kotlinx.coroutines.CoroutineScope
 
-class TasksPageUiAdapter(private val navController: NavController, tasksViewModel: TasksViewModel) :
+class TasksPageUiAdapter(private val navController: NavController, tasksViewModel: TasksViewModel, args: TasksFragmentArgs) :
     RootUiAdapter<TasksPageUiModel> {
 
     override val loadingUiModel = TransitionalUiModel
 
-    private val taskListUiAdapter = TaskListUiAdapter(tasksViewModel = tasksViewModel)
-    private val addTaskUiAdapter = AddTaskUiAdapter(tasksViewModel = tasksViewModel)
+    private val taskListUiAdapter = TaskListUiAdapter(tasksViewModel = tasksViewModel, navController, args)
+    private val addTaskUiAdapter = AddTaskUiAdapter(tasksViewModel = tasksViewModel, args.listEntryType)
     override suspend fun createAndSetupUiModel(scope: CoroutineScope): TasksPageUiModel {
         return TasksPageUiModel(
             TasksPageUiModelContent(
