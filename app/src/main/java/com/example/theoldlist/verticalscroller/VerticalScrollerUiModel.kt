@@ -7,7 +7,7 @@ import com.example.theoldlist.core.ReactiveUiModel
 import com.example.theoldlist.core.UiModel
 import kotlinx.coroutines.flow.Flow
 
-class VerticalScrollerUiModel(scrollerUiModelContent: VerticalScrollerUiModelContent):
+class VerticalScrollerUiModel(scrollerUiModelContent: VerticalScrollerUiModelContent) :
     ReactiveUiModel<VerticalScrollerUiModelContent> {
     override val content = mutableStateOf(scrollerUiModelContent)
 }

@@ -2,7 +2,6 @@ package com.example.theoldlist.taskpage
 
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.theoldlist.R
 import com.example.theoldlist.core.*
 import com.example.theoldlist.core.application.TheOldListApplication
 import com.example.theoldlist.taskdatasource.TasksViewModel

@@ -11,9 +11,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.theoldlist.R
-import com.example.theoldlist.taskpage.TasksPageUiModelMapper
 
-abstract class BaseFragment: Fragment() {
+abstract class BaseFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +30,7 @@ abstract class BaseFragment: Fragment() {
 
     abstract fun getRootUiAdapter(): RootUiAdapter<out UiModel>
 
-    abstract fun getPageUiModelMapper() : UiModelMapper
+    abstract fun getPageUiModelMapper(): UiModelMapper
 }
 
 

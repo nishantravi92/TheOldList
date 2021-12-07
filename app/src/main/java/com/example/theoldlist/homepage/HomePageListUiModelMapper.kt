@@ -5,12 +5,13 @@ import com.example.theoldlist.core.UiModel
 import com.example.theoldlist.core.UiModelMapper
 import com.example.theoldlist.listentry.ListEntryUiComposer
 
-class HomePageListUiModelMapper: UiModelMapper {
+class HomePageListUiModelMapper : UiModelMapper {
 
     private val listEntryUiComposer = ListEntryUiComposer()
+
     @Composable
     override fun mapUiModel(model: UiModel) {
-        when(model) {
+        when (model) {
             is ListEntryUiModel -> listEntryUiComposer.compose(uiModel = model)
         }
     }

@@ -3,7 +3,6 @@ package com.example.theoldlist.taskdatasource
 import androidx.paging.PagingSource
 import androidx.room.*
 import com.example.theoldlist.homelistsdatasource.EntryType
-import com.example.theoldlist.homepage.ListEntryType
 import java.sql.Date
 
 @Entity

@@ -5,7 +5,10 @@ import com.example.theoldlist.taskdatasource.Task
 import com.example.theoldlist.taskdatasource.TasksViewModel
 import com.example.theoldlist.taskpage.TasksFragmentDirections
 
-class TaskUiAdapter(private val tasksViewModel: TasksViewModel, private val navController: NavController) {
+class TaskUiAdapter(
+    private val tasksViewModel: TasksViewModel,
+    private val navController: NavController
+) {
 
     fun createAndSetupUiModel(task: Task): TaskUiModel {
         val taskUiModelAction = object : TaskUiModelAction {

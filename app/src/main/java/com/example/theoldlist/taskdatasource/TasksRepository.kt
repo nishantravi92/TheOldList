@@ -17,17 +17,20 @@ class TasksRepository(private val tasksDao: TasksDao, private val scope: Corouti
 
     fun getAllTasks(): Flow<PagingData<Task>> {
         return Pager(PagingConfig(PAGE_SIZE)) {
-            tasksDao.getAllTasks() }.flow.cachedIn(scope).flowOn(Dispatchers.IO)
+            tasksDao.getAllTasks()
+        }.flow.cachedIn(scope).flowOn(Dispatchers.IO)
     }
 
     fun getAllStarredTasks(): Flow<PagingData<Task>> {
         return Pager(PagingConfig(PAGE_SIZE)) {
-            tasksDao.getAllStarredTasks() }.flow.cachedIn(scope).flowOn(Dispatchers.IO)
+            tasksDao.getAllStarredTasks()
+        }.flow.cachedIn(scope).flowOn(Dispatchers.IO)
     }
 
     fun getTasksByEntryType(entryType: EntryType): Flow<PagingData<Task>> {
         return Pager(PagingConfig(PAGE_SIZE)) {
-            tasksDao.getTasksByEntryType(entryType) }.flow.cachedIn(scope).flowOn(Dispatchers.IO)
+            tasksDao.getTasksByEntryType(entryType)
+        }.flow.cachedIn(scope).flowOn(Dispatchers.IO)
     }
 
     fun markTaskAsCompleted(task: Task) {

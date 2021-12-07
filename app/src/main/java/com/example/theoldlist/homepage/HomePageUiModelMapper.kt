@@ -5,9 +5,8 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import com.example.theoldlist.core.UiModel
 import com.example.theoldlist.core.UiModelMapper
-import java.lang.IllegalArgumentException
 
-class HomePageUiModelMapper: UiModelMapper {
+class HomePageUiModelMapper : UiModelMapper {
 
     private val homepageUiComposer = HomePageUiComposer()
 
@@ -15,7 +14,7 @@ class HomePageUiModelMapper: UiModelMapper {
     @ExperimentalAnimationApi
     @Composable
     override fun mapUiModel(model: UiModel) {
-        when(model) {
+        when (model) {
             is HomePageUiModel -> homepageUiComposer.compose(uiModel = model)
             else -> throw IllegalArgumentException()
         }

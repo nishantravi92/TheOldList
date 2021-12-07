@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
 import com.example.theoldlist.core.*
-import com.example.theoldlist.task.TaskUiModel
 
 class VerticalScrollerUiComposer {
 
@@ -59,9 +58,10 @@ private fun VerticalScrollerUi(
             ) {
                 itemsIndexed(
                     lazyPagingItems,
-                    key = { _, uiModel ->  if(uiModel is Identifyable) {
-                        uiModel.identity
-                    } else ""
+                    key = { _, uiModel ->
+                        if (uiModel is Identifyable) {
+                            uiModel.identity
+                        } else ""
                     }) { index, uiModel ->
                     val isItemConflict = itemConflict(listState.items.getOrNull(index), uiModel)
                     if (isItemConflict) {

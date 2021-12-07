@@ -17,14 +17,14 @@ import com.example.theoldlist.core.UiModelMapper
 import com.example.theoldlist.task.TaskUiComposer
 import com.example.theoldlist.task.TaskUiModel
 
-class TaskListUiModelMapper: UiModelMapper {
+class TaskListUiModelMapper : UiModelMapper {
     private val taskUiComposer = TaskUiComposer()
 
     @ExperimentalFoundationApi
     @ExperimentalMaterialApi
     @Composable
     override fun mapUiModel(model: UiModel) {
-        when(model) {
+        when (model) {
             is TaskUiModel -> taskUiComposer.compose(uiModel = model)
             else -> LoadingItem()
         }

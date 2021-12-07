@@ -48,7 +48,12 @@ private fun AddTaskUi(uiModel: AddTaskUiModel, modifier: Modifier) {
                 addTaskName =
                     sendAddTaskButtonCLickEventAndReset(uiModel.addTaskUiAction, addTaskName)
             },
-            onPrevious = { sendAddTaskButtonCLickEventAndReset(uiModel.addTaskUiAction, addTaskName) }),
+                onPrevious = {
+                    sendAddTaskButtonCLickEventAndReset(
+                        uiModel.addTaskUiAction,
+                        addTaskName
+                    )
+                }),
             leadingIcon = {
                 Icon(
                     Icons.Filled.Add,

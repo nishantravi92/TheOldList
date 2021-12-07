@@ -1,6 +1,5 @@
 package com.example.theoldlist.core
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.theoldlist.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-abstract class BaseBottomSheetFragment: BottomSheetDialogFragment() {
+abstract class BaseBottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,5 +27,5 @@ abstract class BaseBottomSheetFragment: BottomSheetDialogFragment() {
 
     abstract fun getRootUiAdapter(): RootUiAdapter<out UiModel>
 
-    abstract fun getPageUiModelMapper() : UiModelMapper
+    abstract fun getPageUiModelMapper(): UiModelMapper
 }

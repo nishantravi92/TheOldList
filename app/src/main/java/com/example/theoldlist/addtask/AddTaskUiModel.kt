@@ -6,4 +6,4 @@ fun interface AddTaskUiAction {
     fun onAddTaskButtonClick(taskName: String)
 }
 
-class AddTaskUiModel(val addTaskUiAction: AddTaskUiAction): UiModel
+class AddTaskUiModel(val addTaskUiAction: AddTaskUiAction) : UiModel

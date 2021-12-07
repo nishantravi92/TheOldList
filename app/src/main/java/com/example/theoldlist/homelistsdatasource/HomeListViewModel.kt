@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 
-class HomeListViewModel(homeListEntryDao: HomeListEntryDao): ViewModel() {
+class HomeListViewModel(homeListEntryDao: HomeListEntryDao) : ViewModel() {
 
     private val homeListRepository = HomeListRepository(homeListEntryDao, viewModelScope)
 

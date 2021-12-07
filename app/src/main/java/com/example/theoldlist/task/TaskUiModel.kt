@@ -14,7 +14,8 @@ interface TaskUiModelAction {
     fun onLongClicked()
 }
 
-class TaskUiModel(identity: String, taskUiModelContent: TaskUiModelContent) : ReactiveUiModel<TaskUiModelContent>, Identifyable {
+class TaskUiModel(identity: String, taskUiModelContent: TaskUiModelContent) :
+    ReactiveUiModel<TaskUiModelContent>, Identifyable {
     override val content = mutableStateOf(taskUiModelContent)
     override val identity: String = identity
 

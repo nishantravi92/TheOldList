@@ -16,7 +16,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class TaskListUiAdapter(private val tasksViewModel: TasksViewModel, private val navController: NavController, private val args: TasksFragmentArgs) :
+class TaskListUiAdapter(
+    private val tasksViewModel: TasksViewModel,
+    private val navController: NavController,
+    private val args: TasksFragmentArgs
+) :
     UiAdapter<VerticalScrollerUiModel> {
 
     override suspend fun createAndSetupUiModel(scope: CoroutineScope): VerticalScrollerUiModel {
@@ -50,11 +54,11 @@ class TaskListUiAdapter(private val tasksViewModel: TasksViewModel, private val 
 
     // TODO(This should really be abstracted away in the view model itself rather than there)
     private fun getCorrectPagingDataFlow(args: TasksFragmentArgs): Flow<PagingData<Task>> {
-        return if(args.listEntryType ==  EntryType.STARRED) {
+        return if (args.listEntryType == EntryType.STARRED) {
             tasksViewModel.getAllStarredTasks()
-        } else if (args.listEntryType ==  EntryType.WEEK || args.listEntryType ==  EntryType.TODAY) {
+        } else if (args.listEntryType == EntryType.WEEK || args.listEntryType == EntryType.TODAY) {
             tasksViewModel.getAllTasks()
-        } else if (args.listEntryType ==  EntryType.HOME) {
+        } else if (args.listEntryType == EntryType.HOME) {
             tasksViewModel.getAllTasks()
         } else {
             tasksViewModel.getAllTasksByEntryType(args.listEntryType)

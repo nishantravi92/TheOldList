@@ -7,7 +7,8 @@ import com.example.theoldlist.core.ReactiveUiModel
 import com.example.theoldlist.core.UiModel
 import kotlinx.coroutines.flow.Flow
 
-class TaskListUiModel(taskListUiModelContent: TaskListUiModelContent): ReactiveUiModel<TaskListUiModelContent> {
+class TaskListUiModel(taskListUiModelContent: TaskListUiModelContent) :
+    ReactiveUiModel<TaskListUiModelContent> {
     override val content = mutableStateOf(taskListUiModelContent)
 }
 

@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import com.example.theoldlist.core.UiModel
 import com.example.theoldlist.core.UiModelMapper
 
-class EditTaskPageUiModelMapper: UiModelMapper {
+class EditTaskPageUiModelMapper : UiModelMapper {
 
     private val editTaskPageUiComposer = EditTaskPageUiComposer()
 
@@ -14,7 +14,7 @@ class EditTaskPageUiModelMapper: UiModelMapper {
     @ExperimentalAnimationApi
     @Composable
     override fun mapUiModel(model: UiModel) {
-        when(model) {
+        when (model) {
             is EditTaskPageUiModel -> editTaskPageUiComposer.compose(uiModel = model)
         }
     }

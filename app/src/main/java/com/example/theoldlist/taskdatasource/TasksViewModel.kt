@@ -6,7 +6,7 @@ import androidx.paging.PagingData
 import com.example.theoldlist.homelistsdatasource.EntryType
 import kotlinx.coroutines.flow.Flow
 
-class TasksViewModel(tasksDao: TasksDao): ViewModel() {
+class TasksViewModel(tasksDao: TasksDao) : ViewModel() {
 
     private val tasksRepository = TasksRepository(tasksDao, viewModelScope)
 

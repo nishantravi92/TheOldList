@@ -11,7 +11,7 @@ import com.example.theoldlist.taskdatasource.TasksDao
 
 @Database(entities = [Task::class, HomeListEntry::class], version = 1)
 @TypeConverters(Converters::class)
-abstract class TaskDataBase: RoomDatabase() {
+abstract class TaskDataBase : RoomDatabase() {
     abstract fun tasksDao(): TasksDao
     abstract fun homeListEntryDao(): HomeListEntryDao
 }

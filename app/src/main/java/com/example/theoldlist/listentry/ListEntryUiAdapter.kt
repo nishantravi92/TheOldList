@@ -1,8 +1,8 @@
 package com.example.theoldlist.listentry
 
-import com.example.theoldlist.R
 import androidx.navigation.NavController
 import androidx.navigation.navOptions
+import com.example.theoldlist.R
 import com.example.theoldlist.core.ReactiveUiAdapter
 import com.example.theoldlist.homelistsdatasource.EntryType
 import com.example.theoldlist.homelistsdatasource.HomeListEntry
@@ -11,8 +11,12 @@ import com.example.theoldlist.homepage.ListEntryType
 import com.example.theoldlist.homepage.ListEntryUiModel
 import com.example.theoldlist.homepage.ListEntryUiModelContent
 import com.example.theoldlist.taskdatasource.TasksViewModel
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ListEntryUiAdapter(
     private val navController: NavController,
