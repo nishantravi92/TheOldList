@@ -57,19 +57,32 @@ private fun TaskUi(uiModel: TaskUiModel, modifier: Modifier) {
                     shouldHideView = true
                     value.taskUiModelAction.onChecked()
                 })
-            Text(
-                text = value.title,
-                style = MaterialTheme.typography.subtitle1,
-                color = MaterialTheme.colors.onPrimary,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier
-                    .padding(end = 16.dp)
-                    .fillMaxWidth(0.8f)
-            )
+            Column(modifier = Modifier
+                .padding(end = 16.dp)
+                .fillMaxWidth(0.8f)) {
+                Text(
+                    text = value.title,
+                    style = MaterialTheme.typography.subtitle1,
+                    color = MaterialTheme.colors.onPrimary,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(bottom = 4.dp)
+                )
+                value.dueDate?.let {
+                    Text(
+                        text = "Due: $it",
+                        style = MaterialTheme.typography.caption,
+                        color = MaterialTheme.colors.onPrimary,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
+
+            }
             Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxWidth()) {
                 val painterResource =
-                    if (!value.isStarred) painterResource(id = R.drawable.ic_baseline_star_outline_24) else painterResource(
+                    if (!value.isStarred) painterResource(id = R.drawable.ic_baseline_star_outline_24)
+                    else painterResource(
                         id = R.drawable.ic_baseline_star_filled_24
                     )
                 Icon(

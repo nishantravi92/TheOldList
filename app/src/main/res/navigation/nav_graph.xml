@@ -28,5 +28,10 @@
     <dialog
         android:id="@+id/editTaskBottomSheetFragment"
         android:name="com.example.theoldlist.edittask.EditTaskBottomSheetFragment"
-        android:label="EditTaskBottomSheetFragment" />
+        android:label="EditTaskBottomSheetFragment">
+        <argument
+            android:name="taskId"
+            app:argType="string"
+            android:defaultValue="testId" />
+    </dialog>
 </navigation>

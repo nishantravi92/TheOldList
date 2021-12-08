@@ -9,5 +9,14 @@ class EditTaskPageUiModel(content: EditTaskPageUiModelContent) :
     override val content = mutableStateOf(content)
 }
 
+
+interface EditTaskPageUiAction {
+    fun onDueDateClicked()
+}
 @Stable
-class EditTaskPageUiModelContent()
+class EditTaskPageUiModelContent(
+    val title: String?,
+    val description: String? = null,
+    val dueDate: String? = null,
+    val editTaskPageUiAction: EditTaskPageUiAction
+)

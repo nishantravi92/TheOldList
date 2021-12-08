@@ -1,15 +1,14 @@
 package com.example.theoldlist.taskdatasource
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
+import androidx.paging.*
 import com.example.theoldlist.homelistsdatasource.EntryType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import java.sql.Date
 
 class TasksRepository(private val tasksDao: TasksDao, private val scope: CoroutineScope) {
 
@@ -19,6 +18,16 @@ class TasksRepository(private val tasksDao: TasksDao, private val scope: Corouti
         return Pager(PagingConfig(PAGE_SIZE)) {
             tasksDao.getAllTasks()
         }.flow.cachedIn(scope).flowOn(Dispatchers.IO)
+    }
+
+    fun getTasksByDate(date: Date): Flow<PagingData<Task>> {
+        return Pager(PagingConfig(PAGE_SIZE)) {
+            tasksDao.getAllTasks()
+        }.flow.map { pagingData ->
+            pagingData.filter { taskData ->
+                taskData.dueDate != null && (date > taskData.dueDate || date.toString() == taskData.dueDate.toString())
+            }
+        }.cachedIn(scope).flowOn(Dispatchers.IO)
     }
 
     fun getAllStarredTasks(): Flow<PagingData<Task>> {
@@ -43,6 +52,14 @@ class TasksRepository(private val tasksDao: TasksDao, private val scope: Corouti
         scope.launch {
             tasksDao.addTask(task)
         }
+    }
+
+    fun getTask(id: String): Task {
+        return tasksDao.getTask(id)
+    }
+
+    fun getTasksCountByDate(date: Date): Int {
+        return tasksDao.getTasksCountByDate(date)
     }
 
     fun getTasksCount(): Int {

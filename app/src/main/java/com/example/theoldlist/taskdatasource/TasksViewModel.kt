@@ -3,8 +3,12 @@ package com.example.theoldlist.taskdatasource
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.filter
+import androidx.paging.map
 import com.example.theoldlist.homelistsdatasource.EntryType
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import java.sql.Date
 
 class TasksViewModel(tasksDao: TasksDao) : ViewModel() {
 
@@ -12,6 +16,10 @@ class TasksViewModel(tasksDao: TasksDao) : ViewModel() {
 
     fun getAllTasks(): Flow<PagingData<Task>> {
         return tasksRepository.getAllTasks()
+    }
+
+    fun getTasksByDate(date: Date): Flow<PagingData<Task>> {
+        return tasksRepository.getTasksByDate(date)
     }
 
     fun getAllStarredTasks(): Flow<PagingData<Task>> {
@@ -30,6 +38,10 @@ class TasksViewModel(tasksDao: TasksDao) : ViewModel() {
         tasksRepository.addTask(task)
     }
 
+    fun getTask(id: String): Task {
+        return tasksRepository.getTask(id)
+    }
+
     fun getTasksCount(): Int {
         return tasksRepository.getTasksCount()
     }
@@ -42,11 +54,7 @@ class TasksViewModel(tasksDao: TasksDao) : ViewModel() {
         return tasksRepository.getTasksStarredCount()
     }
 
-    fun getTasksDueTodayCount(): Int {
-        return tasksRepository.getTasksCount()
-    }
-
-    fun getTasksDueThisWeekCount(): Int {
-        return tasksRepository.getTasksCount()
+    fun getTasksCountByDate(date: Date): Int {
+        return tasksRepository.getTasksCountByDate(date)
     }
 }

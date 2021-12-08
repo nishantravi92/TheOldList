@@ -17,6 +17,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.sql.Date
+import java.util.*
 
 class ListEntryUiAdapter(
     private val navController: NavController,
@@ -33,10 +35,11 @@ class ListEntryUiAdapter(
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 if (homeListEntry.entryType == EntryType.TODAY) {
-                    numberOfTasksMutableFlow.value = taskListViewModel.getTasksCount()
+                    numberOfTasksMutableFlow.value = taskListViewModel.getTasksCountByDate(Date(Calendar.getInstance().getTime().getTime()))
                 } else if (homeListEntry.entryType == EntryType.STARRED) {
                     numberOfTasksMutableFlow.value = taskListViewModel.getTasksStarredCount()
                 } else if (homeListEntry.entryType == EntryType.WEEK) {
+                    // TODO(This needs to be updated)
                     numberOfTasksMutableFlow.value = taskListViewModel.getTasksCount()
                 } else if (homeListEntry.entryType == EntryType.HOME) {
                     numberOfTasksMutableFlow.value = taskListViewModel.getTasksCount()

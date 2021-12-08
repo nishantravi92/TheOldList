@@ -15,6 +15,8 @@ import com.example.theoldlist.verticalscroller.VerticalScrollerUiModelContent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import java.sql.Date
+import java.util.*
 
 class TaskListUiAdapter(
     private val tasksViewModel: TasksViewModel,
@@ -56,7 +58,9 @@ class TaskListUiAdapter(
     private fun getCorrectPagingDataFlow(args: TasksFragmentArgs): Flow<PagingData<Task>> {
         return if (args.listEntryType == EntryType.STARRED) {
             tasksViewModel.getAllStarredTasks()
-        } else if (args.listEntryType == EntryType.WEEK || args.listEntryType == EntryType.TODAY) {
+        } else if (args.listEntryType == EntryType.TODAY) {
+            tasksViewModel.getTasksByDate(Date(Calendar.getInstance().time.time))
+        } else if (args.listEntryType == EntryType.WEEK) {
             tasksViewModel.getAllTasks()
         } else if (args.listEntryType == EntryType.HOME) {
             tasksViewModel.getAllTasks()

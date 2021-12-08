@@ -6,7 +6,6 @@ import com.example.theoldlist.core.*
 import com.example.theoldlist.core.application.TheOldListApplication
 import com.example.theoldlist.taskdatasource.TasksViewModel
 
-// TODO Need to move this to use the base fragment.
 class TasksFragment : BaseFragment() {
 
     override fun getRootUiAdapter(): RootUiAdapter<out UiModel> {

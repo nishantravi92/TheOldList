@@ -18,7 +18,11 @@ class TaskUiAdapter(
             }
 
             override fun onLongClicked() {
-                navController.navigate(TasksFragmentDirections.actionTasksFragmentToEditTaskBottomSheetFragment())
+                navController.navigate(
+                    TasksFragmentDirections.actionTasksFragmentToEditTaskBottomSheetFragment(
+                        task.id
+                    )
+                )
             }
 
             override fun onStarClicked(isStarred: Boolean) {
@@ -29,6 +33,7 @@ class TaskUiAdapter(
             identity = task.id,
             taskUiModelContent = TaskUiModelContent(
                 title = task.title,
+                dueDate = task.dueDate?.let { it.toString() },
                 taskUiModelAction = taskUiModelAction,
                 isStarred = task.starred
             )

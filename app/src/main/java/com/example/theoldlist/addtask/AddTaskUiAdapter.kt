@@ -5,6 +5,8 @@ import com.example.theoldlist.homelistsdatasource.EntryType
 import com.example.theoldlist.taskdatasource.Task
 import com.example.theoldlist.taskdatasource.TasksViewModel
 import kotlinx.coroutines.CoroutineScope
+import java.sql.Date
+import java.util.*
 
 class AddTaskUiAdapter(
     private val tasksViewModel: TasksViewModel,
@@ -18,11 +20,19 @@ class AddTaskUiAdapter(
                     Task(
                         id = createTaskId(),
                         title = addTaskName,
+                        starred = listEntryTypeToAddTaskTo == EntryType.STARRED,
+                        dueDate = getDueDate(listEntryTypeToAddTaskTo),
                         entryType = listEntryTypeToAddTaskTo
                     )
                 )
             }
         }
+    }
+
+    private fun getDueDate(listEntryTypeToAddTaskTo: EntryType): Date? {
+        return if (listEntryTypeToAddTaskTo == EntryType.TODAY) {
+            Date(Calendar.getInstance().time.time)
+        } else null
     }
 }
 
