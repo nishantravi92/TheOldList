@@ -3,8 +3,7 @@ package com.example.theoldlist.core
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.ComposeView
 import androidx.lifecycle.LifecycleCoroutineScope
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 
 /**
@@ -23,6 +22,8 @@ class RenderBridge(
         composeView.setContent {
             uiModelMapper.mapUiModel(uiModel.value)
         }
-        scope.launch { uiModel.value = rootUiAdapter.createAndSetupUiModel(scope) }
+        scope.launch { withContext(Dispatchers.Default) {
+            uiModel.value = rootUiAdapter.createAndSetupUiModel(scope)
+        } }
     }
 }

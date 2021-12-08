@@ -22,8 +22,7 @@ class TaskListUiAdapter(
     private val tasksViewModel: TasksViewModel,
     private val navController: NavController,
     private val args: TasksFragmentArgs
-) :
-    UiAdapter<VerticalScrollerUiModel> {
+) : UiAdapter<VerticalScrollerUiModel> {
 
     override suspend fun createAndSetupUiModel(scope: CoroutineScope): VerticalScrollerUiModel {
         val content = VerticalScrollerUiModelContent(
@@ -42,7 +41,6 @@ class TaskListUiAdapter(
     }
 
     private val taskListUiAdapterMap: MutableMap<String, TaskUiAdapter> = mutableMapOf()
-
 
     private fun createTaskUiModel(task: Task, tasksViewModel: TasksViewModel): UiModel {
         val taskUiAdapter = if (taskListUiAdapterMap[task.id] == null) {
