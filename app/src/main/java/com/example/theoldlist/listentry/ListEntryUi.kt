@@ -57,7 +57,7 @@ private fun ListEntryUi(uiModel: ListEntryUiModel, modifier: Modifier) {
                     Text(
                         text = content.title,
                         style = MaterialTheme.typography.subtitle1,
-                        color = MaterialTheme.colors.onPrimary,
+                        color = Color.Black,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier

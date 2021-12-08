@@ -16,6 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
@@ -38,6 +39,7 @@ private fun AddTaskUi(uiModel: AddTaskUiModel, modifier: Modifier) {
             .fillMaxWidth()
     ) {
         var addTaskName by rememberSaveable { mutableStateOf("") }
+        val backgroundColor = Color(0x12FFFFFF)
 
         TextField(
             value = addTaskName,
@@ -77,6 +79,7 @@ private fun AddTaskUi(uiModel: AddTaskUiModel, modifier: Modifier) {
                 .fillMaxWidth(),
             colors = TextFieldDefaults.textFieldColors(
                 placeholderColor = colorResource(id = R.color.grey_200),
+                backgroundColor = backgroundColor,
                 cursorColor = colorResource(id = R.color.grey_50),
                 textColor = colorResource(id = R.color.grey_50),
                 focusedIndicatorColor = colorResource(id = R.color.grey_200),

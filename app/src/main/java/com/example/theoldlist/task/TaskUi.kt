@@ -63,7 +63,7 @@ private fun TaskUi(uiModel: TaskUiModel, modifier: Modifier) {
                 Text(
                     text = value.title,
                     style = MaterialTheme.typography.subtitle1,
-                    color = MaterialTheme.colors.onPrimary,
+                    color = Color.Black,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.padding(bottom = 4.dp)
@@ -72,7 +72,7 @@ private fun TaskUi(uiModel: TaskUiModel, modifier: Modifier) {
                     Text(
                         text = "Due: $it",
                         style = MaterialTheme.typography.caption,
-                        color = MaterialTheme.colors.onPrimary,
+                        color = Color.Black,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                     )
