@@ -12,7 +12,10 @@ class EditTaskPageUiModel(content: EditTaskPageUiModelContent) :
 
 interface EditTaskPageUiAction {
     fun onDueDateClicked()
+
+    fun onTaskDescriptionEdited(description: String)
 }
+
 @Stable
 class EditTaskPageUiModelContent(
     val title: String?,

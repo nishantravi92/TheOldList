@@ -8,10 +8,18 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import com.example.theoldlist.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.withContext
 
 private val DarkColorPalette = darkColors(
     primary = purple200,
@@ -34,6 +42,7 @@ onSurface = Color.Black,
 */
 )
 
+@ExperimentalComposeUiApi
 @Composable
 fun TheOldListTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
     val colors = if (darkTheme) {
@@ -46,15 +55,15 @@ fun TheOldListTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Compos
         typography = typography,
         shapes = shapes,
     ) {
-        Box {
-            val image = painterResource(id = R.drawable.nature_waterfall)
-            Image(
-                painter = image,
-                contentScale = ContentScale.Crop,
-                contentDescription = "BackgroundImage",
-                modifier = Modifier.fillMaxSize()
-            )
-            content()
-        }
+            Box {
+                val image = painterResource(id = R.drawable.compressed_mountain)
+                Image(
+                    painter = image,
+                    contentScale = ContentScale.Crop,
+                    contentDescription = "BackgroundImage",
+                    modifier = Modifier.fillMaxSize()
+                )
+                content()
+            }
     }
 }

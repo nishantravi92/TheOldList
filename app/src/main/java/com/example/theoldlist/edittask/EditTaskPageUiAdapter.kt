@@ -35,6 +35,12 @@ class EditTaskPageUiAdapter(
     override val loadingUiModel = TransitionalUiModel
 
     private val editTaskPageUiAction = object : EditTaskPageUiAction {
+
+        override fun onTaskDescriptionEdited(description: String) {
+            taskAndDateFlow.value.first?.copy(description = description)
+                ?.let { tasksViewModel.addTask(it) }
+        }
+
         override fun onDueDateClicked() {
             val picker = MaterialDatePicker.Builder.datePicker()
                 .setSelection(MaterialDatePicker.todayInUtcMilliseconds()).build()

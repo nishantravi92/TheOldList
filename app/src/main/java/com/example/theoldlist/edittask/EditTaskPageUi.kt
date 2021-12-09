@@ -1,38 +1,35 @@
 package com.example.theoldlist.edittask
 
 
-import android.widget.CalendarView
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.DateRange
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Info
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
-import com.example.theoldlist.R
 import com.example.theoldlist.core.ReactiveUi
-import com.google.android.material.chip.Chip
-import java.time.LocalDate
 
 class EditTaskPageUiComposer {
 
+    @ExperimentalComposeUiApi
     @ExperimentalAnimationApi
     @ExperimentalMaterialApi
     @Composable
@@ -44,6 +41,7 @@ class EditTaskPageUiComposer {
     }
 }
 
+@ExperimentalComposeUiApi
 @ExperimentalAnimationApi
 @ExperimentalMaterialApi
 @Composable
@@ -58,17 +56,43 @@ private fun EditTaskPageUi(
                 .background(Color.White)
         ) {
             TitleOrLoadingUi(content)
-            val contentDescription = content.description ?: ""
-            Text(
-                text = "Description: $contentDescription",
-                overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.subtitle2,
-                maxLines = 4,
-                modifier = modifier
-                    .padding(horizontal = 16.dp)
-                    .fillMaxWidth()
-                    .heightIn(min = 50.dp)
-            )
+            val keyboardController = LocalSoftwareKeyboardController.current
+            var addDescription by rememberSaveable { mutableStateOf(content.description ?: "") }
+            Card(
+                border = BorderStroke(1.dp, Color.LightGray),
+                modifier = Modifier
+                    .padding(start = 16.dp, end = 16.dp, bottom = 8.dp)
+                    .wrapContentSize(),
+                backgroundColor = Color.White
+            ) {
+                TextField(
+                    value = "What is going on",
+                    label  = { Text(text = "Add description") },
+                    textStyle = MaterialTheme.typography.subtitle1,
+                    keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
+                    keyboardActions = KeyboardActions(onDone = {
+                        content.editTaskPageUiAction.onTaskDescriptionEdited(addDescription)
+                        keyboardController?.hide()
+                    },
+                        onPrevious = {
+                            content.editTaskPageUiAction.onTaskDescriptionEdited(addDescription)
+                            keyboardController?.hide()
+                        }),
+                    onValueChange = { addDescription = it },
+                    singleLine = true,
+                    modifier = Modifier
+                        .height(80.dp)
+                        .fillMaxWidth(),
+                    colors = TextFieldDefaults.textFieldColors(
+                        placeholderColor = Color.Black,
+                        backgroundColor = Color.White,
+                        cursorColor = Color.Black,
+                        textColor = Color.Black,
+                        focusedIndicatorColor = Color.White,
+                        focusedLabelColor = Color.Black
+                    )
+                )
+            }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 4.dp, bottom = 32.dp)
@@ -76,7 +100,7 @@ private fun EditTaskPageUi(
                 Icon(
                     imageVector = Icons.Outlined.DateRange,
                     contentDescription = "Add due date",
-                    modifier = Modifier
+                    modifier = modifier
                         .padding(end = 8.dp)
                         .size(24.dp)
                 )

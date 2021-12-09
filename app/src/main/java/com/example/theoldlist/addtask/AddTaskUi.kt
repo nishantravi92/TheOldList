@@ -15,8 +15,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
@@ -24,6 +26,7 @@ import com.example.theoldlist.R
 
 class AddTaskUiComposer() {
 
+    @ExperimentalComposeUiApi
     @ExperimentalMaterialApi
     @Composable
     fun compose(uiModel: AddTaskUiModel, modifier: Modifier = Modifier) {
@@ -31,6 +34,7 @@ class AddTaskUiComposer() {
     }
 }
 
+@ExperimentalComposeUiApi
 @Composable
 private fun AddTaskUi(uiModel: AddTaskUiModel, modifier: Modifier) {
     Row(
@@ -40,6 +44,7 @@ private fun AddTaskUi(uiModel: AddTaskUiModel, modifier: Modifier) {
     ) {
         var addTaskName by rememberSaveable { mutableStateOf("") }
         val backgroundColor = Color(0x12FFFFFF)
+        val keyboardController = LocalSoftwareKeyboardController.current
 
         TextField(
             value = addTaskName,
@@ -49,6 +54,7 @@ private fun AddTaskUi(uiModel: AddTaskUiModel, modifier: Modifier) {
             keyboardActions = KeyboardActions(onDone = {
                 addTaskName =
                     sendAddTaskButtonCLickEventAndReset(uiModel.addTaskUiAction, addTaskName)
+                keyboardController?.hide()
             },
                 onPrevious = {
                     sendAddTaskButtonCLickEventAndReset(
