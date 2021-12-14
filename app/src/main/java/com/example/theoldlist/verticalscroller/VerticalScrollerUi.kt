@@ -9,12 +9,14 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
 import com.example.theoldlist.core.*
+import kotlinx.coroutines.launch
 
 class VerticalScrollerUiComposer {
 
@@ -32,9 +35,10 @@ class VerticalScrollerUiComposer {
         verticalScrollerUiModel: VerticalScrollerUiModel,
         contentPadding: PaddingValues = PaddingValues(),
         modifier: Modifier = Modifier,
+        listState: LazyListState = rememberLazyListState(),
         uiModelMapper: UiModelMapper
     ) {
-        VerticalScrollerUi(verticalScrollerUiModel, contentPadding, modifier, uiModelMapper)
+        VerticalScrollerUi(verticalScrollerUiModel, contentPadding, modifier, listState, uiModelMapper)
     }
 }
 
@@ -45,17 +49,17 @@ private fun VerticalScrollerUi(
     verticalScrollerUiModel: VerticalScrollerUiModel,
     contentPadding: PaddingValues,
     modifier: Modifier = Modifier,
+    listState: LazyListState,
     uiModelMapper: UiModelMapper
 ) {
     ReactiveUi(uiModel = verticalScrollerUiModel) { content ->
         val lazyPagingItems = content.uiModelFlow.collectAsLazyPagingItems()
-        val listState = remember { ListState(lazyPagingItems.itemSnapshotList.items) }
-        val state = rememberLazyListState()
         BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
             LazyColumn(
-                state = state,
+                state = listState,
                 contentPadding = contentPadding
             ) {
+
                 itemsIndexed(
                     lazyPagingItems,
                     key = { _, uiModel ->
@@ -63,18 +67,11 @@ private fun VerticalScrollerUi(
                             uiModel.identity
                         } else ""
                     }) { index, uiModel ->
-                    val isItemConflict = itemConflict(listState.items.getOrNull(index), uiModel)
-                    if (isItemConflict) {
-
-                    } else {
-
-                    }
                     uiModel?.let {
                         uiModelMapper.mapUiModel(model = it)
                     }
                     SideEffect {
                         uiModel?.let {
-                            listState.updateList(index, it)
                         }
                     }
                 }

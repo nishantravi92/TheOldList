@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.unit.dp
 import com.example.theoldlist.appbar.AppBarUiComposer
 import com.example.theoldlist.core.ReactiveUi
@@ -17,6 +18,7 @@ class HomePageUiComposer {
     private val homePageUiModelMapper = HomePageListUiModelMapper()
     private val appBarUiComposer = AppBarUiComposer()
 
+    @ExperimentalComposeUiApi
     @ExperimentalAnimationApi
     @ExperimentalMaterialApi
     @Composable
@@ -30,6 +32,7 @@ class HomePageUiComposer {
     }
 }
 
+@ExperimentalComposeUiApi
 @ExperimentalAnimationApi
 @ExperimentalMaterialApi
 @Composable

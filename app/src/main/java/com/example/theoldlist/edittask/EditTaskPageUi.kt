@@ -22,6 +22,10 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
@@ -57,6 +61,7 @@ private fun EditTaskPageUi(
         ) {
             TitleOrLoadingUi(content)
             val keyboardController = LocalSoftwareKeyboardController.current
+            val focusManager = LocalFocusManager.current
             var addDescription by rememberSaveable { mutableStateOf(content.description ?: "") }
             Card(
                 border = BorderStroke(1.dp, Color.LightGray),
@@ -66,23 +71,25 @@ private fun EditTaskPageUi(
                 backgroundColor = Color.White
             ) {
                 TextField(
-                    value = "What is going on",
+                    value = addDescription,
                     label  = { Text(text = "Add description") },
                     textStyle = MaterialTheme.typography.subtitle1,
                     keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
                     keyboardActions = KeyboardActions(onDone = {
                         content.editTaskPageUiAction.onTaskDescriptionEdited(addDescription)
                         keyboardController?.hide()
-                    },
-                        onPrevious = {
-                            content.editTaskPageUiAction.onTaskDescriptionEdited(addDescription)
-                            keyboardController?.hide()
-                        }),
+                    }),
                     onValueChange = { addDescription = it },
                     singleLine = true,
                     modifier = Modifier
                         .height(80.dp)
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .onKeyEvent {
+                            if (it.key == Key.Back) {
+                                focusManager.clearFocus(false)
+                            }
+                            false
+                        },
                     colors = TextFieldDefaults.textFieldColors(
                         placeholderColor = Color.Black,
                         backgroundColor = Color.White,
