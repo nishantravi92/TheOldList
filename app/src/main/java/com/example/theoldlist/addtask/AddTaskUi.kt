@@ -92,13 +92,13 @@ private fun AddTaskUi(uiModel: AddTaskUiModel, modifier: Modifier, listState: La
                     false
                 },
             colors = TextFieldDefaults.textFieldColors(
-                placeholderColor = colorResource(id = R.color.grey_200),
-                backgroundColor = backgroundColor,
-                cursorColor = colorResource(id = R.color.grey_50),
-                textColor = colorResource(id = R.color.grey_50),
-                focusedIndicatorColor = colorResource(id = R.color.grey_200),
-                leadingIconColor = colorResource(id = R.color.grey_50),
-                focusedLabelColor = colorResource(id = R.color.grey_200)
+                placeholderColor = MaterialTheme.colors.onPrimary,
+                backgroundColor = MaterialTheme.colors.secondary,
+                cursorColor = MaterialTheme.colors.onPrimary,
+                textColor = MaterialTheme.colors.onPrimary,
+                focusedIndicatorColor = MaterialTheme.colors.onPrimary,
+                leadingIconColor = MaterialTheme.colors.onPrimary,
+                focusedLabelColor = MaterialTheme.colors.onPrimary
             )
         )
     }

@@ -15,7 +15,7 @@ class AddTaskUiAdapter(
 
     override suspend fun createAndSetupUiModel(scope: CoroutineScope): AddTaskUiModel {
         return AddTaskUiModel { addTaskName ->
-            if (!addTaskName.isEmpty()) {
+            if (addTaskName.isNotEmpty()) {
                 tasksViewModel.addTask(
                     Task(
                         id = createTaskId(),

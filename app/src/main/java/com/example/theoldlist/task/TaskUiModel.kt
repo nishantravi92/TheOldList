@@ -2,7 +2,7 @@ package com.example.theoldlist.task
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.mutableStateOf
-import com.example.theoldlist.core.Identifyable
+import com.example.theoldlist.core.Identifiable
 import com.example.theoldlist.core.ReactiveUiModel
 
 
@@ -15,7 +15,7 @@ interface TaskUiModelAction {
 }
 
 class TaskUiModel(identity: String, taskUiModelContent: TaskUiModelContent) :
-    ReactiveUiModel<TaskUiModelContent>, Identifyable {
+    ReactiveUiModel<TaskUiModelContent>, Identifiable {
     override val content = mutableStateOf(taskUiModelContent)
     override val identity: String = identity
 

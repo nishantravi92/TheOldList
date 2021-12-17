@@ -30,6 +30,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.example.theoldlist.core.ReactiveUi
+import com.example.theoldlist.ui.theme.PlainBackgroundMaterialTheme
 
 class EditTaskPageUiComposer {
 
@@ -54,70 +55,77 @@ private fun EditTaskPageUi(
     modifier: Modifier
 ) {
     ReactiveUi(uiModel = uiModel) { content ->
-        Column(
-            modifier = Modifier
-                .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
-                .background(Color.White)
-        ) {
-            TitleOrLoadingUi(content)
-            val keyboardController = LocalSoftwareKeyboardController.current
-            val focusManager = LocalFocusManager.current
-            var addDescription by rememberSaveable { mutableStateOf(content.description ?: "") }
-            if (content.description != null) {
-                addDescription = content.description
-            }
-            Card(
-                border = BorderStroke(1.dp, Color.LightGray),
+        PlainBackgroundMaterialTheme {
+            Column(
                 modifier = Modifier
-                    .padding(start = 16.dp, end = 16.dp, bottom = 8.dp)
-                    .wrapContentSize(),
-                backgroundColor = Color.White
+                    .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
+                    .background(MaterialTheme.colors.background)
             ) {
-                TextField(
-                    value = addDescription,
-                    label = { Text(text = "Add description") },
-                    textStyle = MaterialTheme.typography.subtitle1,
-                    keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
-                    keyboardActions = KeyboardActions(onDone = {
-                        content.editTaskPageUiAction.onTaskDescriptionEdited(addDescription)
-                        keyboardController?.hide()
-                    }),
-                    onValueChange = {
-                        addDescription = it
-                        //content.editTaskPageUiAction.onTaskDescriptionEdited(addDescription)
-                    },
-                    singleLine = true,
+                TitleOrLoadingUi(content)
+                val keyboardController = LocalSoftwareKeyboardController.current
+                val focusManager = LocalFocusManager.current
+                var addDescription by rememberSaveable { mutableStateOf(content.description ?: "") }
+                if (content.description != null) {
+                    addDescription = content.description
+                }
+                Card(
+                    border = BorderStroke(1.dp, Color.LightGray),
                     modifier = Modifier
-                        .height(80.dp)
-                        .fillMaxWidth()
-                        .onKeyEvent {
-                            if (it.key == Key.Back) {
-                                focusManager.clearFocus(false)
-                            }
-                            false
+                        .padding(start = 16.dp, end = 16.dp, bottom = 8.dp)
+                        .wrapContentSize(),
+                    backgroundColor = MaterialTheme.colors.background
+                ) {
+                    TextField(
+                        value = addDescription,
+                        label = { Text(text = "Add description") },
+                        textStyle = MaterialTheme.typography.subtitle1,
+                        keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
+                        keyboardActions = KeyboardActions(onDone = {
+                            content.editTaskPageUiAction.onTaskDescriptionEdited(addDescription)
+                            keyboardController?.hide()
+                        }),
+                        onValueChange = {
+                            addDescription = it
                         },
-                    colors = TextFieldDefaults.textFieldColors(
-                        placeholderColor = Color.Black,
-                        backgroundColor = Color.White,
-                        cursorColor = Color.Black,
-                        textColor = Color.Black,
-                        focusedIndicatorColor = Color.White,
-                        focusedLabelColor = Color.Black
+                        singleLine = true,
+                        modifier = Modifier
+                            .height(80.dp)
+                            .fillMaxWidth()
+                            .onKeyEvent {
+                                if (it.key == Key.Back) {
+                                    focusManager.clearFocus(false)
+                                }
+                                false
+                            },
+                        colors = TextFieldDefaults.textFieldColors(
+                            placeholderColor = MaterialTheme.colors.onPrimary,
+                            backgroundColor = MaterialTheme.colors.background,
+                            cursorColor = MaterialTheme.colors.onPrimary,
+                            textColor = MaterialTheme.colors.onPrimary,
+                            focusedIndicatorColor = MaterialTheme.colors.onPrimary,
+                            focusedLabelColor = MaterialTheme.colors.onPrimary
+                        )
                     )
-                )
-            }
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 4.dp, bottom = 32.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.DateRange,
-                    contentDescription = "Add due date",
-                    modifier = modifier
-                        .padding(end = 8.dp)
-                        .size(24.dp)
-                )
-                DueDateChip(content)
+                }
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 4.dp,
+                        bottom = 32.dp
+                    )
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.DateRange,
+                        tint = MaterialTheme.colors.onPrimary,
+                        contentDescription = "Add due date",
+                        modifier = modifier
+                            .padding(end = 8.dp)
+                            .size(24.dp)
+                    )
+                    DueDateChip(content)
+                }
             }
         }
     }
@@ -138,6 +146,7 @@ private fun TitleOrLoadingUi(content: EditTaskPageUiModelContent) {
             Text(
                 text = content.title,
                 style = MaterialTheme.typography.h5,
+                color = MaterialTheme.colors.onPrimary,
                 maxLines = 3,
             )
         }
@@ -147,7 +156,7 @@ private fun TitleOrLoadingUi(content: EditTaskPageUiModelContent) {
 @Composable
 private fun DueDateChip(content: EditTaskPageUiModelContent) {
     val dueDateText = content.dueDate ?: "Add due date"
-    ChipUi(chipBorderColor = Color.Black) {
+    ChipUi(chipBorderColor = MaterialTheme.colors.primary) {
         Text(
             text = dueDateText,
             style = MaterialTheme.typography.subtitle1,
@@ -163,6 +172,7 @@ private fun ChipUi(chipBorderColor: Color, content: @Composable () -> Unit) {
     Surface(
         modifier = Modifier.wrapContentWidth(),
         elevation = 2.dp,
+        color = MaterialTheme.colors.background,
         shape = RoundedCornerShape(16.dp),
         border = BorderStroke(
             width = 1.dp,

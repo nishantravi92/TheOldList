@@ -25,7 +25,7 @@ class HomeListRepository(
                     homeListEntryDao.addListEntry(
                         HomeListEntry(
                             id = createHomeListId(),
-                            title = "Home",
+                            title = "All tasks",
                             entryType = EntryType.HOME
                         )
                     )

@@ -18,9 +18,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.theoldlist.R
 import com.example.theoldlist.core.ReactiveUi
-import com.example.theoldlist.homepage.ListEntryType
-import com.example.theoldlist.homepage.ListEntryUiModel
-import com.example.theoldlist.homepage.ListEntryUiModelContent
 
 class ListEntryUiComposer() {
 
@@ -33,14 +30,12 @@ class ListEntryUiComposer() {
 @Composable
 private fun ListEntryUi(uiModel: ListEntryUiModel, modifier: Modifier) {
     ReactiveUi(uiModel = uiModel) { content ->
-
-        val backgroundColor = Color(0x80FFFFFF)
         Column {
             Column(verticalArrangement = Arrangement.Center,
                 modifier = modifier
                     .fillMaxWidth()
                     .height(42.dp)
-                    .background(backgroundColor)
+                    .background(MaterialTheme.colors.secondary)
                     .clickable(
                         interactionSource = MutableInteractionSource(),
                         indication = rememberRipple(color = Color.White)
@@ -57,7 +52,7 @@ private fun ListEntryUi(uiModel: ListEntryUiModel, modifier: Modifier) {
                     Text(
                         text = content.title,
                         style = MaterialTheme.typography.subtitle1,
-                        color = Color.Black,
+                        color = MaterialTheme.colors.onPrimary,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier
@@ -72,11 +67,13 @@ private fun ListEntryUi(uiModel: ListEntryUiModel, modifier: Modifier) {
                             if (it == null) {
                                 CircularProgressIndicator(
                                     modifier = Modifier.size(20.dp),
-                                    color = Color.Black,
+                                    color = MaterialTheme.colors.onPrimary,
                                     strokeWidth = 2.dp
                                 )
                             } else {
-                                Text(text = it.toString())
+                                Text(text = it.toString(),
+                                    style = MaterialTheme.typography.subtitle1,
+                                    color = MaterialTheme.colors.onPrimary)
                             }
                         }
                     }
@@ -93,11 +90,14 @@ private fun DisplayIcon(content: ListEntryUiModelContent) {
     when (content.listEntryType) {
         ListEntryType.STARRED -> Icon(
             imageVector = Icons.Outlined.Star,
-            contentDescription = contentDescription
+            contentDescription = contentDescription,
+            tint = MaterialTheme.colors.onPrimary
         )
         ListEntryType.HOME -> Icon(
             imageVector = Icons.Outlined.Home,
-            contentDescription = contentDescription
+            contentDescription = contentDescription,
+            tint = MaterialTheme.colors.onPrimary
+
         )
         ListEntryType.DUE_TODAY -> Icon(
             imageVector = Icons.Outlined.DateRange,
@@ -112,10 +112,12 @@ private fun DisplayIcon(content: ListEntryUiModelContent) {
         ListEntryType.MOVIES_TO_WATCH -> Icon(
             painter = painterResource(id = R.drawable.outline_theaters_24),
             contentDescription = contentDescription,
+            tint = MaterialTheme.colors.onPrimary
         )
         ListEntryType.BOOKS_TO_READ -> Icon(
             painter = painterResource(id = R.drawable.outline_menu_book_24),
             contentDescription = contentDescription,
+            tint = MaterialTheme.colors.onPrimary
         )
     }
 }

@@ -1,5 +1,5 @@
 package com.example.theoldlist.core
 
-interface Identifyable {
+interface Identifiable {
     val identity: String
 }

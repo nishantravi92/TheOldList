@@ -1,4 +1,4 @@
-package com.example.theoldlist.settings.wallpaper
+package com.example.theoldlist.settings.wallpapersetting
 
 import androidx.compose.runtime.mutableStateOf
 import com.example.theoldlist.core.ReactiveUiModel

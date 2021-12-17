@@ -22,7 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
-import com.example.theoldlist.core.Identifyable
+import com.example.theoldlist.core.Identifiable
 import com.example.theoldlist.core.ReactiveUi
 import com.example.theoldlist.core.UiModel
 import com.example.theoldlist.core.UiModelMapper
@@ -70,7 +70,7 @@ private fun VerticalScrollerUi(
                 itemsIndexed(
                     lazyPagingItems,
                     key = { _, uiModel ->
-                        if (uiModel is Identifyable) {
+                        if (uiModel is Identifiable) {
                             uiModel.identity
                         } else ""
                     }) { index, uiModel ->

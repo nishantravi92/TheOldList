@@ -6,7 +6,7 @@ import com.example.theoldlist.appbar.AppBarUiModelContent
 import com.example.theoldlist.appbar.NavItemUiModel
 import com.example.theoldlist.core.RootUiAdapter
 import com.example.theoldlist.core.TransitionalUiModel
-import com.example.theoldlist.settings.wallpaper.WallpaperSettingsUiAdapter
+import com.example.theoldlist.settings.wallpapersetting.WallpaperSettingsUiAdapter
 import kotlinx.coroutines.CoroutineScope
 
 class SettingsPageRootUiAdapter(

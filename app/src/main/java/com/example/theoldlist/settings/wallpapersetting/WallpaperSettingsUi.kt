@@ -1,8 +1,7 @@
-package com.example.theoldlist.settings.wallpaper
+package com.example.theoldlist.settings.wallpapersetting
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -10,7 +9,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -38,11 +36,11 @@ private fun WallpaperSettingsUi(uiModel: WallpaperSettingsUiModel, modifier: Mod
             modifier = modifier
                 .wrapContentHeight()
                 .fillMaxWidth()
-                .background(Color.White)
         ) {
             Text(
                 modifier = modifier.padding(start = 16.dp, top = 16.dp),
                 text = content.title,
+                color = MaterialTheme.colors.onPrimary,
                 style = MaterialTheme.typography.h5
             )
             LazyRow(
@@ -77,7 +75,10 @@ private fun WallpaperSettingsUi(uiModel: WallpaperSettingsUiModel, modifier: Mod
                                         wallpaper.wallpaperId
                                     )
                                 },
-                                colors = CheckboxDefaults.colors(checkedColor = Color.Red)
+                                colors = CheckboxDefaults.colors(
+                                    checkedColor = MaterialTheme.colors.primary,
+                                    checkmarkColor = MaterialTheme.colors.onPrimary
+                                )
                             )
                         }
                     }

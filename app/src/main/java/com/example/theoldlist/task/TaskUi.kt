@@ -35,7 +35,6 @@ class TaskUiComposer() {
 @ExperimentalMaterialApi
 @Composable
 private fun TaskUi(uiModel: TaskUiModel, modifier: Modifier) {
-    val backgroundColor = Color(0x80FFFFFF)
     ReactiveUi(uiModel = uiModel) { value ->
         var shouldHideView by remember { mutableStateOf(false) }
         Row(
@@ -46,13 +45,13 @@ private fun TaskUi(uiModel: TaskUiModel, modifier: Modifier) {
                 .getSizeModifier(shouldHideView)
                 .fillMaxWidth()
                 .roundedShape()
-                .background(backgroundColor)
+                .background(MaterialTheme.colors.secondary)
                 .combinedClickable(onLongClick = { value.taskUiModelAction.onLongClicked() }) { }
         ) {
             Spacer(modifier = modifier.width(width = 8.dp))
             Checkbox(
                 checked = false,
-                colors = CheckboxDefaults.colors(uncheckedColor = Color.DarkGray),
+                colors = CheckboxDefaults.colors(uncheckedColor = MaterialTheme.colors.onPrimary),
                 onCheckedChange = {
                     shouldHideView = true
                     value.taskUiModelAction.onChecked()
@@ -65,7 +64,7 @@ private fun TaskUi(uiModel: TaskUiModel, modifier: Modifier) {
                 Text(
                     text = value.title,
                     style = MaterialTheme.typography.subtitle1,
-                    color = Color.Black,
+                    color = MaterialTheme.colors.onPrimary,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.padding(bottom = 4.dp)
@@ -74,7 +73,7 @@ private fun TaskUi(uiModel: TaskUiModel, modifier: Modifier) {
                     Text(
                         text = "Due: $it",
                         style = MaterialTheme.typography.caption,
-                        color = Color.Black,
+                        color = MaterialTheme.colors.onPrimary,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                     )
@@ -90,6 +89,7 @@ private fun TaskUi(uiModel: TaskUiModel, modifier: Modifier) {
                 Icon(
                     painterResource,
                     "Star task",
+                    tint = MaterialTheme.colors.onPrimary,
                     modifier = Modifier
                         .padding(end = 16.dp)
                         .width(24.dp)

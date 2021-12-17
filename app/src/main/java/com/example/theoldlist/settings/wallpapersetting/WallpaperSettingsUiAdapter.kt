@@ -1,4 +1,4 @@
-package com.example.theoldlist.settings.wallpaper
+package com.example.theoldlist.settings.wallpapersetting
 
 import com.example.theoldlist.core.ReactiveUiAdapter
 import com.example.theoldlist.settings.PreferenceUtils

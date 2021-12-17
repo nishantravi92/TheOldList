@@ -3,7 +3,7 @@ package com.example.theoldlist.settings
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.theoldlist.settings.wallpaper.WallpaperData
+import com.example.theoldlist.settings.wallpapersetting.WallpaperData
 
 
 object PreferenceUtils {

@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import com.example.theoldlist.core.UiModel
 import com.example.theoldlist.core.UiModelMapper
 import com.example.theoldlist.listentry.ListEntryUiComposer
+import com.example.theoldlist.listentry.ListEntryUiModel
 
 class HomePageListUiModelMapper : UiModelMapper {
 

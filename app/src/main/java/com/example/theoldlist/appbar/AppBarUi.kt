@@ -25,14 +25,14 @@ class AppBarUiComposer() {
 @Composable
 private fun AppBarUi(uiModel: AppBarUiModel, modifier: Modifier) {
     ReactiveUi(uiModel = uiModel) { content ->
-        TopAppBar(backgroundColor = Color.Red) {
+        TopAppBar(backgroundColor = MaterialTheme.colors.primary) {
             Row {
                 content.navItemUiModel?.let {
                     when (it) {
                         is NavItemUiModel.BackButtonNavItemUiModel ->
                             Icon(
                                 imageVector = Icons.Filled.ArrowBack,
-                                tint = Color.White,
+                                tint = MaterialTheme.colors.onPrimary,
                                 contentDescription = "Back",
                                 modifier = Modifier
                                     .padding(start = 12.dp, top = 2.dp)
@@ -41,7 +41,7 @@ private fun AppBarUi(uiModel: AppBarUiModel, modifier: Modifier) {
                 }
                 Text(
                     text = content.title,
-                    color = Color.White,
+                    color = MaterialTheme.colors.onPrimary,
                     style = MaterialTheme.typography.h6,
                     modifier = modifier.padding(horizontal = 16.dp)
                 )
@@ -50,7 +50,7 @@ private fun AppBarUi(uiModel: AppBarUiModel, modifier: Modifier) {
                         when (it) {
                             is AppBarItemUiModel.SettingsItemUiModel -> Icon(
                                 imageVector = Icons.Filled.Settings,
-                                tint = Color.White,
+                                tint = MaterialTheme.colors.onPrimary,
                                 contentDescription = "Settings",
                                 modifier = Modifier
                                     .padding(start = 12.dp, top = 2.dp, end = 8.dp)

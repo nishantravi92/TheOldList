@@ -2,7 +2,7 @@ package com.example.theoldlist.settings
 
 import com.example.theoldlist.appbar.AppBarUiModel
 import com.example.theoldlist.core.UiModel
-import com.example.theoldlist.settings.wallpaper.WallpaperSettingsUiModel
+import com.example.theoldlist.settings.wallpapersetting.WallpaperSettingsUiModel
 
 class SettingsPageUiModel(
     val appBarUiModel: AppBarUiModel,
