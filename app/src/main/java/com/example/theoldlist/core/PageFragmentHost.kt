@@ -4,5 +4,5 @@ import androidx.fragment.app.FragmentManager
 
 interface PageFragmentHost {
 
-    val fManager:FragmentManager
+    val fManager: FragmentManager
 }

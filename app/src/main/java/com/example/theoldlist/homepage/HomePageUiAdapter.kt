@@ -1,6 +1,7 @@
 package com.example.theoldlist.homepage
 
 import androidx.navigation.NavController
+import com.example.theoldlist.appbar.AppBarItemUiModel
 import com.example.theoldlist.appbar.AppBarUiModel
 import com.example.theoldlist.appbar.AppBarUiModelContent
 import com.example.theoldlist.core.RootUiAdapter
@@ -11,7 +12,7 @@ import com.example.theoldlist.taskdatasource.TasksViewModel
 import kotlinx.coroutines.CoroutineScope
 
 class HomePageUiAdapter(
-    navController: NavController,
+    private val navController: NavController,
     homeListViewModel: HomeListViewModel,
     taskListViewModel: TasksViewModel
 ) : RootUiAdapter<HomePageUiModel> {
@@ -25,7 +26,15 @@ class HomePageUiAdapter(
         return HomePageUiModel(
             HomePageUiModelContent(
                 appBarUiModel = AppBarUiModel(
-                    AppBarUiModelContent("Home")
+                    AppBarUiModelContent(
+                        title = "Home",
+                        appBarItemUiModel = AppBarItemUiModel.SettingsItemUiModel {
+                            navController
+                                .navigate(
+                                    HomeFragmentDirections
+                                        .actionHomeFragmentToSettingsFragment()
+                                )
+                        })
                 ),
                 verticalScrollerUiModel = homeListUiAdapter.createAndSetupUiModel(coroutineScope)
             )

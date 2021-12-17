@@ -16,15 +16,16 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
-import com.example.theoldlist.core.*
-import kotlinx.coroutines.launch
+import com.example.theoldlist.core.Identifyable
+import com.example.theoldlist.core.ReactiveUi
+import com.example.theoldlist.core.UiModel
+import com.example.theoldlist.core.UiModelMapper
 
 class VerticalScrollerUiComposer {
 
@@ -38,7 +39,13 @@ class VerticalScrollerUiComposer {
         listState: LazyListState = rememberLazyListState(),
         uiModelMapper: UiModelMapper
     ) {
-        VerticalScrollerUi(verticalScrollerUiModel, contentPadding, modifier, listState, uiModelMapper)
+        VerticalScrollerUi(
+            verticalScrollerUiModel,
+            contentPadding,
+            modifier,
+            listState,
+            uiModelMapper
+        )
     }
 }
 

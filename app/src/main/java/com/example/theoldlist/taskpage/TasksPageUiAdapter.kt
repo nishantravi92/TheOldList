@@ -7,6 +7,7 @@ import com.example.theoldlist.appbar.AppBarUiModelContent
 import com.example.theoldlist.appbar.NavItemUiModel
 import com.example.theoldlist.core.RootUiAdapter
 import com.example.theoldlist.core.TransitionalUiModel
+import com.example.theoldlist.homelistsdatasource.EntryType
 import com.example.theoldlist.taskdatasource.TasksViewModel
 import com.example.theoldlist.tasklist.TaskListUiAdapter
 import kotlinx.coroutines.CoroutineScope
@@ -14,7 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 class TasksPageUiAdapter(
     private val navController: NavController,
     tasksViewModel: TasksViewModel,
-    args: TasksFragmentArgs
+    private val args: TasksFragmentArgs
 ) :
     RootUiAdapter<TasksPageUiModel> {
 
@@ -30,7 +31,7 @@ class TasksPageUiAdapter(
             TasksPageUiModelContent(
                 AppBarUiModel(
                     uiModelContent = AppBarUiModelContent(
-                        "Your todos",
+                        getListEntryTypeAppBarTitle(args),
                         navItemUiModel = NavItemUiModel.BackButtonNavItemUiModel(
                             backButtonNavItemAction = { navController.navigateUp() })
                     )
@@ -39,5 +40,21 @@ class TasksPageUiAdapter(
                 verticalScrollerUiModel = taskListUiAdapter.createAndSetupUiModel(scope),
             )
         )
+    }
+
+    private fun getListEntryTypeAppBarTitle(args: TasksFragmentArgs): String {
+        return if (args.listEntryType == EntryType.STARRED) {
+            "Starred tasks"
+        } else if (args.listEntryType == EntryType.TODAY) {
+            "Tasks due today"
+        } else if (args.listEntryType == EntryType.WEEK) {
+            "Tasks due this week"
+        } else if (args.listEntryType == EntryType.MOVIES) {
+            "Movies to watch"
+        } else if (args.listEntryType == EntryType.BOOKS) {
+            "Books to read"
+        } else {
+            "Your todos"
+        }
     }
 }

@@ -57,9 +57,11 @@ private fun TaskUi(uiModel: TaskUiModel, modifier: Modifier) {
                     shouldHideView = true
                     value.taskUiModelAction.onChecked()
                 })
-            Column(modifier = Modifier
-                .padding(end = 16.dp)
-                .fillMaxWidth(0.8f)) {
+            Column(
+                modifier = Modifier
+                    .padding(end = 16.dp)
+                    .fillMaxWidth(0.8f)
+            ) {
                 Text(
                     text = value.title,
                     style = MaterialTheme.typography.subtitle1,

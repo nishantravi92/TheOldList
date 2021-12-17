@@ -55,7 +55,10 @@ private fun TasksPageUi(
                 val listState = rememberLazyListState()
                 appBarUiComposer.compose(content.appBarUiModel)
                 Column {
-                    addTaskUiComposer.compose(uiModel = content.addTaskUiModel, listState = listState)
+                    addTaskUiComposer.compose(
+                        uiModel = content.addTaskUiModel,
+                        listState = listState
+                    )
                     verticalScrollerUiComposer.compose(
                         verticalScrollerUiModel = content.verticalScrollerUiModel,
                         listState = listState,

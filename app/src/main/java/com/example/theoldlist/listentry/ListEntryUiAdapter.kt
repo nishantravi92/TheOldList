@@ -35,14 +35,27 @@ class ListEntryUiAdapter(
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 if (homeListEntry.entryType == EntryType.TODAY) {
-                    numberOfTasksMutableFlow.value = taskListViewModel.getTasksCountByDate(Date(Calendar.getInstance().getTime().getTime()))
+                    numberOfTasksMutableFlow.value = taskListViewModel.getTasksCountByDate(
+                        Date(
+                            Calendar.getInstance().time.time
+                        )
+                    )
                 } else if (homeListEntry.entryType == EntryType.STARRED) {
                     numberOfTasksMutableFlow.value = taskListViewModel.getTasksStarredCount()
                 } else if (homeListEntry.entryType == EntryType.WEEK) {
-                    // TODO(This needs to be updated)
-                    numberOfTasksMutableFlow.value = taskListViewModel.getTasksCount()
+                    val calendar = Calendar.getInstance()
+                    val days = 7 - calendar.get(Calendar.DAY_OF_WEEK)
+                    calendar.add(Calendar.DATE, days)
+                    numberOfTasksMutableFlow.value =
+                        taskListViewModel.getTasksCountByDate(Date(calendar.time.time))
                 } else if (homeListEntry.entryType == EntryType.HOME) {
                     numberOfTasksMutableFlow.value = taskListViewModel.getTasksCount()
+                } else if (homeListEntry.entryType == EntryType.BOOKS) {
+                    numberOfTasksMutableFlow.value =
+                        taskListViewModel.getTasksCountByEntryType(EntryType.BOOKS)
+                } else if (homeListEntry.entryType == EntryType.MOVIES) {
+                    numberOfTasksMutableFlow.value =
+                        taskListViewModel.getTasksCountByEntryType(EntryType.MOVIES)
                 } else {
                     numberOfTasksMutableFlow.value =
                         taskListViewModel.getTasksCountByEntryType(homeListEntry.entryType)

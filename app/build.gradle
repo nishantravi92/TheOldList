@@ -65,33 +65,34 @@ dependencies {
     // ----- Fragment dependencies ----------
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
-
-    // ----- End of Fragment dependencies ----------
+    // -*-*- End of fragment dependencies -*-*-*-*--
 
     // ----- Kotlin dependencies ----------
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    // ----- End of Kotlin dependencies ----------
+    // -*-*- Kotlin dependencies -*-*-*-*--
 
     // ----- Paging dependencies ----------
     implementation("androidx.paging:paging-compose:1.0.0-alpha14")
-
-    // ----- End of Paging dependencies ----------
+    // -*-*- End of paging dependencies -*-*-*-*--
 
     // ----- Room dependencies ----------
     def room_version = "2.3.0"
-
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
-    // ----- End of Room dependencies ----------
+    // -*-*- End of room dependencies -*-*-*-*--
 
 
     // ----- Navigation dependencies ----------
     def nav_version = "2.3.5"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-    // ----- End of navigation dependencies ----------
+    // -*-*- End of navigation dependencies -*-*-*-*--
+
+    // ----- Preference dependencies ----------
+    def preference_version = "1.1.1"
+    implementation "androidx.preference:preference-ktx:$preference_version"
+    // -*-*- End of preference dependencies -*-*-*-*--
 
     def activity_version = "1.4.0"
     implementation "androidx.activity:activity-ktx:$activity_version"

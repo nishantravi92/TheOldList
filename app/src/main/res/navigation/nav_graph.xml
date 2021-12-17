@@ -12,6 +12,13 @@
             app:destination="@id/tasksFragment"
             app:launchSingleTop="false">
         </action>
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/tasksFragment"
@@ -34,4 +41,8 @@
             app:argType="string"
             android:defaultValue="testId" />
     </dialog>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.theoldlist.settings.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

@@ -59,7 +59,10 @@ class TaskListUiAdapter(
         } else if (args.listEntryType == EntryType.TODAY) {
             tasksViewModel.getTasksByDate(Date(Calendar.getInstance().time.time))
         } else if (args.listEntryType == EntryType.WEEK) {
-            tasksViewModel.getAllTasks()
+            val calendar = Calendar.getInstance()
+            val days = 7 - calendar.get(Calendar.DAY_OF_WEEK)
+            calendar.add(Calendar.DATE, days)
+            tasksViewModel.getTasksByDate(Date(calendar.time.time))
         } else if (args.listEntryType == EntryType.HOME) {
             tasksViewModel.getAllTasks()
         } else {

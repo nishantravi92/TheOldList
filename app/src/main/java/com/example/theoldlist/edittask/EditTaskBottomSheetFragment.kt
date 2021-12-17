@@ -16,7 +16,12 @@ class EditTaskBottomSheetFragment : BaseBottomSheetFragment(), PageFragmentHost 
         val args: EditTaskBottomSheetFragmentArgs by navArgs()
         val tasksViewModel: TasksViewModel by
         viewModelsFactory { TasksViewModel((activity?.application as TheOldListApplication).tasksDao) }
-        return EditTaskPageUiAdapter(args, tasksViewModel, tasksViewModel.viewModelScope, this as PageFragmentHost)
+        return EditTaskPageUiAdapter(
+            args,
+            tasksViewModel,
+            tasksViewModel.viewModelScope,
+            this as PageFragmentHost
+        )
     }
 
     override fun getPageUiModelMapper(): UiModelMapper {

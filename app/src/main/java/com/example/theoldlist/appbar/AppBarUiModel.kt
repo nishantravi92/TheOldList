@@ -11,7 +11,8 @@ class AppBarUiModel(uiModelContent: AppBarUiModelContent) : ReactiveUiModel<AppB
 
 @Immutable
 class AppBarUiModelContent(
-    val title: String, val navItemUiModel: NavItemUiModel? = null,
+    val title: String,
+    val navItemUiModel: NavItemUiModel? = null,
     val appBarItemUiModel: AppBarItemUiModel? = null
 )
 
@@ -24,8 +25,8 @@ sealed class NavItemUiModel() : UiModel {
     }
 }
 
-sealed class AppBarItemUiModel() : UiModel {
-    class SettingsItemUiModel : NavItemUiModel() {
+sealed class AppBarItemUiModel : UiModel {
+    class SettingsItemUiModel(val settingsIconAction: SettingsIconAction) : AppBarItemUiModel() {
         fun interface SettingsIconAction {
             fun onSettingsIconClicked()
         }

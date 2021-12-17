@@ -63,6 +63,9 @@ private fun EditTaskPageUi(
             val keyboardController = LocalSoftwareKeyboardController.current
             val focusManager = LocalFocusManager.current
             var addDescription by rememberSaveable { mutableStateOf(content.description ?: "") }
+            if (content.description != null) {
+                addDescription = content.description
+            }
             Card(
                 border = BorderStroke(1.dp, Color.LightGray),
                 modifier = Modifier
@@ -72,14 +75,17 @@ private fun EditTaskPageUi(
             ) {
                 TextField(
                     value = addDescription,
-                    label  = { Text(text = "Add description") },
+                    label = { Text(text = "Add description") },
                     textStyle = MaterialTheme.typography.subtitle1,
                     keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
                     keyboardActions = KeyboardActions(onDone = {
                         content.editTaskPageUiAction.onTaskDescriptionEdited(addDescription)
                         keyboardController?.hide()
                     }),
-                    onValueChange = { addDescription = it },
+                    onValueChange = {
+                        addDescription = it
+                        //content.editTaskPageUiAction.onTaskDescriptionEdited(addDescription)
+                    },
                     singleLine = true,
                     modifier = Modifier
                         .height(80.dp)

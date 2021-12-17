@@ -1,11 +1,11 @@
 package com.example.theoldlist.appbar
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -45,6 +45,20 @@ private fun AppBarUi(uiModel: AppBarUiModel, modifier: Modifier) {
                     style = MaterialTheme.typography.h6,
                     modifier = modifier.padding(horizontal = 16.dp)
                 )
+                Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxWidth()) {
+                    content.appBarItemUiModel?.let {
+                        when (it) {
+                            is AppBarItemUiModel.SettingsItemUiModel -> Icon(
+                                imageVector = Icons.Filled.Settings,
+                                tint = Color.White,
+                                contentDescription = "Settings",
+                                modifier = Modifier
+                                    .padding(start = 12.dp, top = 2.dp, end = 8.dp)
+                                    .size(24.dp)
+                                    .clickable { it.settingsIconAction.onSettingsIconClicked() })
+                        }
+                    }
+                }
             }
         }
     }
